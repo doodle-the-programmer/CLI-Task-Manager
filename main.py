@@ -16,3 +16,17 @@ class Task():
 
     def to_dict(self):
         return self.__dict__
+
+TASKS_FILE = "tasks.json"
+
+def load_tasks():
+    try:
+        with open(TASKS_FILE, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_tasks(tasks):
+    with open(TASKS_FILE, "w") as file:
+        json.dump(tasks, file, indent=4)
+
